@@ -1,15 +1,53 @@
 import { useState } from 'react'
 import Game from './game'
-import InitialBudget from './initialBudget'
+import Fund from './fund'
 import '../style/App.css'
+import * as formula from './formula'
 
 function App() {
-  const [betBudget, setBetBudget] = useState()
+  const [gameFund, setGameFund] = useState({initTotal: null, initStart: null, newHigh: null, update: null})
+  const [runDetails, setRunDetails] = useState({won: null, difference: null})
 
-  const setInitialBudget = (e) => {
-    setBetBudget(new FormData(e.target).get('initialBudget'))
-
+  // Initial Setting Of Fund, Only Used Once
+  const setFund = (e) => {
+    const fund = new FormData(e.target)
+  
+    setGameFund({
+      ...gameFund,
+      initTotal: parseInt(fund.get('totalFund')),
+      initStart: parseInt(fund.get('gameFund')),
+      newHigh: parseInt(fund.get('gameFund')),
+      update: parseInt(fund.get('gameFund')),
+    }),
+    
     e.preventDefault();
+  }
+  
+
+  const logRun = (e, bet) => {
+    const result = parseInt(new FormData(e.target).get('runResult')) // this is the result of run
+    const difference = result - gameFund.update  // this is the difference of previous total and current total
+    const wonRun = difference >= 0
+    //const totalDiff = formula.totalDifference(gameFund.initTotal, gameFund.update)
+    //const gameStatus = gameFund.update >= gameFund.initTotal ? 'bullish' : 'bearish'
+
+    setRunDetails({ 
+      ...runDetails,
+      won: wonRun,
+      difference: difference,
+    }),
+    
+    setGameFund({ 
+      ...gameFund,
+      update: result,
+      newHigh: result > gameFund.newHigh ? result : gameFund.newHigh, // if the user is winning, the updated winning is the new start
+    }),
+    
+    e.preventDefault();
+  }
+
+  const fundsWereSet = () => {
+    return gameFund.update !== null && gameFund.newHigh !== null
   }
 
   return (
@@ -19,7 +57,7 @@ function App() {
       </div>
 
       <div className="container">
-        {betBudget ? <Game initialBudget={betBudget}/> : <InitialBudget setInitialBudget={setInitialBudget} />}
+        { fundsWereSet() ? <Game funds={gameFund} run={runDetails} logRun={logRun} /> : <Fund setFund={setFund} />}
       </div>
     </>
   )

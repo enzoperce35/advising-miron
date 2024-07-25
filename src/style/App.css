@@ -17,5 +17,10 @@
 
 form {
   display: flex;
+  flex-direction: column;
+  line-height: 80px;
+}
 
+#submit {
+  align-self: center;
 }
