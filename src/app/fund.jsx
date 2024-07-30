@@ -1,16 +1,16 @@
 export default function Fund({setFund}) {
 
     return (
-      <form onSubmit={(e) => setFund(e)}>
+      <form id="starting-input" onSubmit={(e) => setFund(e)}>
         <div>
           <div>
             <label htmlFor="totalFund">Total: </label>
-            <input type="number" name="totalFund" id="totalFund" value={190}/>
+            <input type="number" name="totalFund" id="totalFund" required/>
           </div>
           
           <div>
             <label htmlFor="gameFund">Game: </label>
-            <input type="number" name="gameFund" id="gameFund" value={190}/>
+            <input type="number" name="gameFund" id="gameFund" required/>
           </div>
         </div>
 

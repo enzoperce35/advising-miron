@@ -6,11 +6,11 @@ function totalDifference(initial, current) {
 }
 
 function addWeight(run, fund, game) {
-  let runScore =  run.difference / game.bet
-  const totalDiff = totalDifference(fund.initTotal, fund.update)
+  let runScore =  Math.abs(run.difference / game.bet)
+  const totalDiff = totalDifference(fund.newHigh, fund.update)
 
-  if ((run.won && game.state === 'bullish') || (!run.won && game.state == 'bearish')) { //sinuswetrte || minamalas 
-    return (runScore + (runScore * (totalDiff / 100)))
+  if (!run.won && fund.bearish) { //minamalas
+    runScore += (runScore * (totalDiff / 100))
   }
 
   return runScore

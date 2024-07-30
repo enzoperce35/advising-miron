@@ -17,10 +17,27 @@
 
 form {
   display: flex;
-  flex-direction: column;
   line-height: 80px;
+  flex-direction: column;
+}
+
+#round-input {
+  align-self: center;
 }
 
 #submit {
   align-self: center;
+}
+
+#advice-values {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media screen and (max-width: 650px) {
+  #advice {
+    font-size: medium;
+  }
 }

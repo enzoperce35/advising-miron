@@ -5,7 +5,7 @@ import '../style/App.css'
 import * as formula from './formula'
 
 function App() {
-  const [gameFund, setGameFund] = useState({initTotal: null, initStart: null, newHigh: null, update: null})
+  const [gameFund, setGameFund] = useState({initTotal: null, initStart: null, newStart: null, newHigh: null, update: null})
   const [runDetails, setRunDetails] = useState({won: null, difference: null})
 
   // Initial Setting Of Fund, Only Used Once
@@ -16,8 +16,9 @@ function App() {
       ...gameFund,
       initTotal: parseInt(fund.get('totalFund')),
       initStart: parseInt(fund.get('gameFund')),
-      newHigh: parseInt(fund.get('gameFund')),
-      update: parseInt(fund.get('gameFund')),
+      newHigh: parseInt(fund.get('totalFund')),
+      newStart: parseInt(fund.get('gameFund')),
+      update: parseInt(fund.get('totalFund')),
     }),
     
     e.preventDefault();
@@ -28,8 +29,6 @@ function App() {
     const result = parseInt(new FormData(e.target).get('runResult')) // this is the result of run
     const difference = result - gameFund.update  // this is the difference of previous total and current total
     const wonRun = difference >= 0
-    //const totalDiff = formula.totalDifference(gameFund.initTotal, gameFund.update)
-    //const gameStatus = gameFund.update >= gameFund.initTotal ? 'bullish' : 'bearish'
 
     setRunDetails({ 
       ...runDetails,
@@ -41,6 +40,7 @@ function App() {
       ...gameFund,
       update: result,
       newHigh: result > gameFund.newHigh ? result : gameFund.newHigh, // if the user is winning, the updated winning is the new start
+      newStart: result > gameFund.newHigh ? (gameFund.newStart + difference) : gameFund.newStart,
     }),
     
     e.preventDefault();
@@ -54,6 +54,7 @@ function App() {
     <>
       <div id='header'>
         <h2>Advising Miron</h2>
+         
       </div>
 
       <div className="container">
