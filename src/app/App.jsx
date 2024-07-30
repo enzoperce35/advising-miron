@@ -54,7 +54,7 @@ function App() {
     <>
       <div id='header'>
         <h2>Advising Miron</h2>
-         
+        <span className={!fundsWereSet() ? 'hidden' : 'show' }>{`${gameFund.initStart} => ${gameFund.initStart + (gameFund.update - gameFund.initTotal)}`}</span>
       </div>
 
       <div className="container">

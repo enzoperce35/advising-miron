@@ -38,7 +38,7 @@ export default function Game({funds, run, logRun}) {
 
       <form onSubmit={(e) => logRun(e, gameDetails.bet)}>
         <div id="round-input">
-          <input type="number" name="runResult" id="runResult" placeholder={funds.update} required/>
+          <input type="number" step="any" name="runResult" id="runResult" placeholder={funds.update} required/>
         </div>
        
         <div id="submit">

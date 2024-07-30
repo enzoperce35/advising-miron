@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 
 function adviceSpin(spins, normalBet, gritBet, weightDiff) {
-  if ((spins < 1) || (weightDiff > 40)) { 
+  if ((spins < 0) || (weightDiff > 35)) { 
     return "Let's get this over for now"
   } else if (spins < 4) { //do grit when you have 3 spins left
     return `Spin 3 Times at ${gritBet} pesos`
@@ -13,7 +13,7 @@ function adviceSpin(spins, normalBet, gritBet, weightDiff) {
 }
 
 function determineSpins(details, funds) {
-  const safeMargin = details.safe + details.bet  //add 1 more bet so remaining spins wont drop to zero
+  const safeMargin = details.safe
   const gritMargin = details.grit * 3 //3 last spins with highered bet
   const betMargin = safeMargin + gritMargin
   const spins = (funds.update - betMargin) / details.bet // number of normal spins
@@ -42,7 +42,7 @@ export default function Advice({details, funds}) {
   return (
     <div className="game">
       <div id="advice-values">
-        <span>{`Diff: ${adviceValues.weightDiff} `}</span>
+        <span>{`Diff: ${Math.round(adviceValues.weightDiff * 100 + Number.EPSILON) / 100} `}</span>
         <span>{`Spins: ${adviceValues.spins} `}</span>
       </div>
       
