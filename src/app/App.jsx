@@ -2,7 +2,10 @@ import { useState } from 'react'
 import Game from './game'
 import Fund from './fund'
 import '../style/App.css'
-import * as formula from './formula'
+
+function getFundStatus(fund) {
+  return fund.initStart + (fund.update - fund.initTotal)
+}
 
 function App() {
   const [gameFund, setGameFund] = useState({initTotal: null, initStart: null, newStart: null, newHigh: null, update: null})
@@ -54,11 +57,11 @@ function App() {
     <>
       <div id='header'>
         <h2>Advising Miron</h2>
-        <span className={!fundsWereSet() ? 'hidden' : 'show' }>{`${gameFund.initStart} => ${gameFund.initStart + (gameFund.update - gameFund.initTotal)}`}</span>
+        <span className={!fundsWereSet() ? 'hidden' : 'show' }>{`${gameFund.initStart} => ${getFundStatus(gameFund)}`}</span>
       </div>
 
       <div className="container">
-        { fundsWereSet() ? <Game funds={gameFund} run={runDetails} logRun={logRun} /> : <Fund setFund={setFund} />}
+        { fundsWereSet() ? <Game funds={gameFund} run={runDetails} logRun={logRun} fundStatus={getFundStatus(gameFund)}/> : <Fund setFund={setFund} />}
       </div>
     </>
   )

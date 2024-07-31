@@ -3,8 +3,8 @@ import { FundProcessor } from "./fundProcessor"
 import * as formula from './formula'
 import Advice from './advice'
 
-export default function Game({funds, run, logRun}) {
-  const [gameDetails, setGameDetails] = useState({bet: null, grit: null, safe: null, bear: 0, bull: 0, bearish: false})
+export default function Game({funds, run, logRun, fundStatus}) {
+  const [gameDetails, setGameDetails] = useState({bet: null, defend: null, grit: null, safe: null, bear: 0, bull: 0, bearish: false})
   
   function setWeight(subj, currWeight, fund) {
     if (fund.bullish || run.won == null) return 0;
@@ -17,12 +17,13 @@ export default function Game({funds, run, logRun}) {
   }
   
   useEffect(() => {
-    const fund = new FundProcessor(funds, run);
+    const fund = new FundProcessor(funds, run, fundStatus);
     
     setGameDetails({ 
       ...gameDetails,
       bet: fund.bet['bet'],
       grit: fund.bet['grit'],
+      defend: fund.bet['defend'],
       safe: fund.safe,
       state: fund.state,
       bear: setWeight('bear', gameDetails.bear, fund),
@@ -34,7 +35,7 @@ export default function Game({funds, run, logRun}) {
 
   return (
     <div>
-      <Advice details={gameDetails} funds={funds}/>
+      <Advice run={run} details={gameDetails} funds={funds}/>
 
       <form onSubmit={(e) => logRun(e, gameDetails.bet)}>
         <div id="round-input">
