@@ -37,13 +37,13 @@ function spinCount(spins) {
   return spins <= spinCount ? spins : spinCount
 }
 
-function setBet(run, details, bet) {
+function setBet(run, details, bet) {alert(details.bet)
   if (bet === null) return details.bet;
   
   const diffPercentage = run.difference / bet
   console.log(diffPercentage)
   
-  if (diffPercentage >= -2.5){
+  if (diffPercentage >= -5){
     return details.bet
   } else if (diffPercentage <= -7) {
     return details.defend
@@ -69,7 +69,7 @@ export default function Advice({run, details, funds}) {
     <div className="game">
       <div id="advice-values">
         <span>{`Diff: ${Math.round(adviceValues.weightDiff * 100 + Number.EPSILON) / 100} `}</span>
-        <span>{`Spins: ${adviceValues.spins} `}</span>
+        <span className="hidden">{`Spins: ${adviceValues.spins} `}</span>
       </div>
       
       <h1 id="advice">{adviceSpin(spinCount(adviceValues.spins), adviceValues.bet, details.grit, adviceValues.weightDiff)}</h1>

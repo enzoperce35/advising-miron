@@ -13,7 +13,7 @@ class FundProcessor {
   }
 
   get bet() {
-    const base = this.fundStatus
+    const base = this.newStart
     
     if (base < 100) {      //99
       return {bet: 1, defend: 1, grit: 3}
