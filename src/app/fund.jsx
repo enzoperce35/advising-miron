@@ -5,12 +5,12 @@ export default function Fund({setFund}) {
         <div>
           <div>
             <label htmlFor="totalFund">Total: </label>
-            <input type="number" step="any" name="totalFund" id="totalFund" value={102.90} required/>
+            <input type="number" step="any" name="totalFund" id="totalFund" required/>
           </div>
           
           <div>
             <label htmlFor="gameFund">Game: </label>
-            <input type="number" step="any" name="gameFund" id="gameFund" value={102} required/>
+            <input type="number" step="any" name="gameFund" id="gameFund"  required/>
           </div>
         </div>
 
