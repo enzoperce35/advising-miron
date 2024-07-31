@@ -37,11 +37,10 @@ function spinCount(spins) {
   return spins <= spinCount ? spins : spinCount
 }
 
-function setBet(run, details, bet) {alert(details.bet)
+function setBet(run, details, bet) {
   if (bet === null) return details.bet;
   
   const diffPercentage = run.difference / bet
-  console.log(diffPercentage)
   
   if (diffPercentage >= -5){
     return details.bet
