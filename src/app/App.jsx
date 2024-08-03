@@ -56,7 +56,7 @@ function App() {
   return (
     <>
       <div id='header'>
-        <h2>Advising Miron</h2>
+        <h2>Advising Miron 2</h2>
         <span className={!fundsWereSet() ? 'hidden' : 'show' }>{`${gameFund.initStart} => ${getFundStatus(gameFund)}`}</span>
       </div>
 
